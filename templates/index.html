@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Traffic Light</title>
+
+        <link rel="icon" type="image/x-icon" href="https://iconarchive.com/download/i107635/google/noto-emoji-travel-places/42571-vertical-traffic-light.ico" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <form method="post" action="/">
+                <div class="text-center">
+                    <h1>🚦 Traffic Light 🚦</h1>
+                    <select name="mode" method="GET" action="/" onchange="this.form.submit()">
+                      <option value="{{modes[0]}}" selected>{{modes[0]}}</option>
+                      {% for mode in modes[1:] %}
+                        <option value="{{mode}}">{{mode}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                {% if modes[0] == 'Startup' %}
+                <div>
+                    <h2>Startup</h2>
+                    <p>The traffic light is on. Choose a mode to continue.</p>
+                </div>
+                {% elif modes[0] == 'Static' %}
+                <div>
+                    <h2>Static Mode</h2>
+                    <label for="red" class="form-label">Red</label>
+                    <input type="range" class="form-range" value="{{ red }}" min="0" max="255" id="red" name="red"
+                           oninput="this.nextElementSibling.value = this.value">
+                    <output>{{ red }}</output>
+
+                    <label for="yellow" class="form-label">Yellow</label>
+                    <input type="range" class="form-range" value="{{ yellow }}" min="0" max="255" id="yellow" name="yellow"
+                           oninput="this.nextElementSibling.value = this.value">
+                    <output>{{ yellow }}</output>
+
+                    <label for="green" class="form-label">Green</label>
+                    <input type="range" class="form-range" value="{{ green }}" min="0" max="255" id="green" name="green"
+                           oninput="this.nextElementSibling.value = this.value">
+                    <output>{{ green }}</output>
+                </div>
+                {% elif modes[0] == 'Loop' %}
+                <div>
+                    <h2>Loop</h2>
+                    <select name="func" method="GET" action="/">
+                      <option value="{{funcs[0]}}" selected>{{funcs[0]}}</option>
+                      {% for func in funcs[1:] %}
+                        <option value="{{func}}">{{func}}</option>
+                      {% endfor %}
+                    </select>
+                    <br>
+                    <label for="strobe" class="form-label">Strobe</label>
+                    <input type="range" class="form-range" value="{{ strobe }}" min="0" max="255" id="strobe" name="strobe"
+                           oninput="this.nextElementSibling.value = this.value">
+                    <output>{{ strobe }}</output>Hz
+                </div>
+                {% elif modes[0] == 'Automatic' %}
+                <div>
+                    <h2>Automatic</h2>
+                </div>
+                {% elif modes[0] == 'Sound' %}
+                <div>
+                    <h2>Sound Reactive</h2>
+                    <label for="sensivity" class="form-label">Sensivity</label>
+                    <input type="range" class="form-range" value="{{ sensivity }}" min="0" max="255" id="sensivity" name="sensivity"
+                           oninput="this.nextElementSibling.value = this.value">
+                    <output>{{ sensivity }}</output>
+                </div>
+                {% endif %}
+                <div class="text-center">
+                    <br>
+                    <input class="btn btn-primary py-3" type="submit" value="Submit">
+                    <br>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
