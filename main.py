@@ -21,12 +21,15 @@ def index():
             modes.remove(selected_mode)
             modes.insert(0, selected_mode)
             if selected_mode == "Startup":
+                # Set Startup Mode
                 pass
             elif selected_mode == "Static":
+                # Set Static Mode
                 red = request.form.get('red')
                 yellow = request.form.get('yellow')
                 green = request.form.get('green')
             elif selected_mode == "Loop":
+                # Set Loop Mode
                 selected_func = request.form.get('func')
                 if not selected_func:
                     selected_func = funcs[0]
@@ -34,8 +37,10 @@ def index():
                 funcs.insert(0, selected_func)
                 strobe = request.form.get('strobe')
             elif selected_mode == "Automatic":
+                # Set Automatic Mode
                 pass
             elif selected_mode == "Sound":
+                # Set Sound Reactive Mode
                 sensivity = request.form.get('sensivity')
             return render_template('index.html', modes=modes, funcs=funcs, red=red, yellow=yellow, green=green, strobe=strobe, sensivity=sensivity)
         else:
